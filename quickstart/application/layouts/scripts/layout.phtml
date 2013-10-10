@@ -1,0 +1,23 @@
+<?php 
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Test');
+
+echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+<head>
+    <?php echo $this->headMeta(); ?> 
+    <?php echo $this->headTitle(); ?>
+    <?php $this->headScript()->appendFile($this->baseUrl().'/static/js/jquery-1.10.2.min.js'); ?>
+    <?php echo $this->headScript()->appendFile($this->baseUrl().'/static/js/bootstrap.js'); ?>
+    <?php $this->headLink()->prependStylesheet($this->baseUrl().'/static/css/bootstrap.css'); ?>
+    <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/static/css/bootstrap-theme.css'); ?>
+</head>
+<body>
+
+<div id="content">
+    <h1><?php echo $this->escape($this->title); ?></h1>
+    <?php echo $this->layout()->content; ?>
+</div>
+</body>
+</html>
