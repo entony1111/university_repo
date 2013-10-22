@@ -1,5 +1,8 @@
 <script src="<?php echo $this->baseUrl().'/static/js/index/index.js' ?>">
 </script>
+<script src="<?php echo $this->baseUrl().'/static/js/bootstrap-datepicker.js' ?>">
+</script>
+<link type="text/css" rel="stylesheet" media="screen" href="<?php echo $this->baseUrl().'/static/css/datepicker.css' ?>" />
 <div class="input-block">
 	<ul id="input-block-tabs" class="nav nav-tabs">
   		<li id="monograph" class="active">
@@ -18,8 +21,9 @@
   			<a>Електронний ресурс</a>
   		</li>
 	</ul>
-	<div id="monograph-content" class="content input-block">
+	<div id="monograph-content" class="content input-block center">
 		<div id="monograph-author" class="hero-unit">
+			<h4>Про Авторів</h4>
 			<div>
 				<label>Автори</label>
 			</div>
@@ -29,12 +33,13 @@
 					<button onclick="SARM.INDEX.deleteAuthor($(this));" class="btn" type="button">-</button>
 				</li>
 			</ul>
-			<div class="navbar-form pull-left">
+			<div class="input-append">
 				 <input id="author-full-name" type="text" class="span2">
 			    <button id="add-button" onclick="SARM.INDEX.addAuthor();" class="btn">+</button>
 			</div>
 		</div>
 		<div id="monograph-publication" class="hero-unit">
+			<h4>Про Монографію</h4>
 			<div>
 				<label>Місто видавництва</label>
 				<input class="input-xlarge" type="text"></input>
@@ -45,13 +50,17 @@
 			</div>
 			<div>
 				<label>Рік видавництва</label>
-				<input class="input-xlarge" type="text"></input>
+				<input id="monograph-publication-date" class="input-small" type="text"></input>
 			</div>
 			<div>
 				<label>Кількість сторінок</label>
-				<input class="input-xlarge" type="text"></input>
+				<input class="input-mini" type="text"></input>
 			</div>
 		</div>
+	</div>
+	<div id="monograph-content-output" class="hero-unit right">
+		<h4>Результат</h4>
+		<textarea id="output-result" class="output-textarea"></textarea>
 	</div>
 	<div id="textbook-content" class="content input-block" style="display: none">
 		<div id="textbook-author">
@@ -78,8 +87,4 @@
 		</div>
 	</div>
 </div>
-<!-- 
-<div class="output-block">
-	<textarea id="output-result"></textarea>
-</div>
- -->
+

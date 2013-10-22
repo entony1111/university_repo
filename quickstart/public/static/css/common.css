@@ -2,3 +2,27 @@
 {
 	display:none;
 }
+.center
+{
+	left: 20%; /* Отступ в процентах от левого края окна */
+	width: 400px; /* Ширина блока */
+	height: 450px; /* Высота блока */
+	position: absolute; /* Абсолютное позиционирование блока */
+	margin-left: -200px; /* Отрицательный отступ от левого края страницы, должен равняться половине высоты блока со знаком минус */
+}
+
+.output-textarea
+{
+	width: 400px;
+	height: 450px;
+	resize: none;
+}
+
+.right 
+{
+	left: 50%;
+	width: 400px;
+	height: 450px;
+	position: absolute;
+	margin-left: -100px;
+}

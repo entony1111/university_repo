@@ -30,4 +30,16 @@ SARM.init = function ()
 			{
 				SARM.INDEX.wsitchTab(ev);
 			});
-}
+	
+	var nowTemp = new Date();
+	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+	
+	$('#monograph-publication-date').datepicker({
+		format: 'dd-mm-yyyy',
+		viewMode: 'years',
+		onRender: function(date) {
+	    	return date.valueOf() > now.valueOf() ? 'disabled' : '';
+	  	}
+	});
+	$('#monograph-publication-date').datepicker('setValue', new Date());
+};
