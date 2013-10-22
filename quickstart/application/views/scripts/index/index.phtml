@@ -1,45 +1,85 @@
 <script src="<?php echo $this->baseUrl().'/static/js/index/index.js' ?>">
 </script>
-<style>
-    a:link,
-    a:visited
-    {
-        color: #0398CA;
-    }
-
-    span#zf-name
-    {
-        color: #91BE3F;
-    }
-
-    div#welcome
-    {
-        color: #FFFFFF;
-        background-image: url(http://framework.zend.com/images/bkg_header.jpg);
-        width:  600px;
-        height: 400px;
-        border: 2px solid #444444;
-        overflow: hidden;
-        text-align: center;
-    }
-
-    div#more-information
-    {
-        background-image: url(http://framework.zend.com/images/bkg_body-bottom.gif);
-        height: 100%;
-    }
-</style>
-<div id="welcome">
-    <h1>Welcome to the <span id="zf-name">Zend Framework!</span></h1>
-
-    <h3>This is your project's main page</h3>
-
-    <div id="more-information">
-        <p><img src="http://framework.zend.com/images/PoweredBy_ZF_4LightBG.png" /></p>
-        <p>
-            Helpful Links: <br />
-            <a href="http://framework.zend.com/">Zend Framework Website</a> |
-            <a href="http://framework.zend.com/manual/en/">Zend Framework Manual</a>
-        </p>
-    </div>
+<div class="input-block">
+	<ul id="input-block-tabs" class="nav nav-tabs">
+  		<li id="monograph" class="active">
+    		<a>Монографія</a>
+  		</li>
+  		<li id="textbook">
+  			<a>Підручник/посібник</a>
+  		</li>
+  		<li id="article">
+  			<a>Стаття</a>
+  		</li>
+  		<li id="thesis">
+  			<a>Тези доповідей конференції</a>
+  		</li>
+  		<li id="eresource">
+  			<a>Електронний ресурс</a>
+  		</li>
+	</ul>
+	<div id="monograph-content" class="content input-block">
+		<div id="monograph-author" class="hero-unit">
+			<div>
+				<label>Автори</label>
+			</div>
+			<ul id="monograph-author-list">
+				<li class="author-list-template hidden">
+					<span class="author-name"></span>
+					<button onclick="SARM.INDEX.deleteAuthor($(this));" class="btn" type="button">-</button>
+				</li>
+			</ul>
+			<div class="navbar-form pull-left">
+				 <input id="author-full-name" type="text" class="span2">
+			    <button id="add-button" onclick="SARM.INDEX.addAuthor();" class="btn">+</button>
+			</div>
+		</div>
+		<div id="monograph-publication" class="hero-unit">
+			<div>
+				<label>Місто видавництва</label>
+				<input class="input-xlarge" type="text"></input>
+			</div>
+			<div>
+				<label>Назва видавництва</label>
+				<input class="input-xlarge" type="text"></input>
+			</div>
+			<div>
+				<label>Рік видавництва</label>
+				<input class="input-xlarge" type="text"></input>
+			</div>
+			<div>
+				<label>Кількість сторінок</label>
+				<input class="input-xlarge" type="text"></input>
+			</div>
+		</div>
+	</div>
+	<div id="textbook-content" class="content input-block" style="display: none">
+		<div id="textbook-author">
+		</div>
+		<div id="textbook-publication">
+		</div>
+	</div>
+	<div id="article-content" class="content input-block" style="display: none">
+		<div id="article-author">
+		</div>
+		<div id="article-publication">
+		</div>
+	</div>
+	<div id="thesis-content" class="content input-block" style="display: none">
+		<div id="thesis-author">
+		</div>
+		<div id="thesis-publication">
+		</div>
+	</div>
+	<div id="eresource-content" class="content input-block" style="display: none">
+		<div id="eresource-author">
+		</div>
+		<div id="eresource-publication">
+		</div>
+	</div>
 </div>
+<!-- 
+<div class="output-block">
+	<textarea id="output-result"></textarea>
+</div>
+ -->
