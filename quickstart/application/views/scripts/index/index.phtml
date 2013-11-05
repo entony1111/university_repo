@@ -2,11 +2,13 @@
 </script>
 <script src="<?php echo $this->baseUrl().'/static/js/bootstrap-datepicker.js' ?>">
 </script>
+<script src="<?php echo $this->baseUrl().'/static/js/ext.js' ?>">
+</script>
 <link type="text/css" rel="stylesheet" media="screen" href="<?php echo $this->baseUrl().'/static/css/datepicker.css' ?>" />
 <div class="input-block">
 	<ul id="input-block-tabs" class="nav nav-tabs">
   		<li id="monograph" class="active">
-    		<a>Монографія</a>
+                    <a>Монографія</a>
   		</li>
   		<li id="textbook">
   			<a>Підручник/посібник</a>
@@ -23,25 +25,66 @@
 	</ul>
 	<div id="monograph-content" class="content input-block center">
 		<div id="monograph-author" class="hero-unit">
-			<h4>Про Авторів</h4>
+			<h4>Про авторів</h4>
 			<div>
 				<label>Автори</label>
 			</div>
-			<ul id="monograph-author-list">
+			<ul id="monograph-content-author-list">
 				<li class="author-list-template hidden">
 					<span class="author-name"></span>
 					<button onclick="SARM.INDEX.deleteAuthor($(this));" class="btn" type="button">-</button>
 				</li>
 			</ul>
 			<div class="input-append">
-				 <input id="author-full-name" type="text" class="span2">
-			    <button id="add-button" onclick="SARM.INDEX.addAuthor();" class="btn">+</button>
+				 <input id="monograph-content-author-full-name" type="text" class="span2">
+			    <button id="add-button" onclick="SARM.INDEX.addAuthor($(this));" class="btn">+</button>
 			</div>
 		</div>
 		<div id="monograph-publication" class="hero-unit">
-			<h4>Про Монографію</h4>
+			<h4>Про монографію</h4>
 			<div>
-				<label>Місто видавництва</label>
+				<label>Назва монографії</label>
+				<input id="monograph-publication-monograph-name-input" class="input-xlarge" type="text" onkeyup="SARM.INDEX.handleMonographFormatting();"></input>
+			</div>
+			<div>
+				<label>Місце видавництва</label>
+				<input id="monograph-publication-place-publication-input" class="input-xlarge" type="text" onkeyup="SARM.INDEX.handleMonographFormatting();"></input>
+			</div>
+			<div>
+				<label>Назва видавництва</label>
+				<input id="monograph-publication-name-publication-input" class="input-xlarge" type="text" onkeyup="SARM.INDEX.handleMonographFormatting();"></input>
+			</div>
+			<div>
+				<label>Рік видавництва</label>
+				<input id="monograph-publication-date" class="input-small datepicker" type="text"></input>
+			</div>
+			<div>
+				<label>Кількість сторінок</label>
+				<input id="monograph-publication-pages" class="input-mini" type="text" onchange="SARM.INDEX.handleMonographFormatting();"></input>
+			</div>
+		</div>
+	</div>
+	<div id="textbook-content" class="content input-block center" style="display: none">
+		<div id="textbook-author" class="hero-unit">
+			<h4>Про авторів</h4>
+			<div>
+				<label>Автори</label>
+			</div>
+			<ul id="textbook-content-author-list">
+				<li class="author-list-template hidden">
+					<span class="author-name"></span>
+					<button onclick="SARM.INDEX.deleteAuthor($(this));" class="btn" type="button">-</button>
+				</li>
+			</ul>
+			<div class="input-append">
+				 <input id="textbook-content-author-full-name" type="text" class="span2">
+			    <button id="add-button" onclick="SARM.INDEX.addAuthor($(this));" class="btn">+</button>
+			</div>
+		</div>
+		<div id="textbook-publication" class="hero-unit">
+			<h4>Про підручник/посібник</h4>
+			<div>
+				<label>Місце видавництва</label>
 				<input class="input-xlarge" type="text"></input>
 			</div>
 			<div>
@@ -50,7 +93,7 @@
 			</div>
 			<div>
 				<label>Рік видавництва</label>
-				<input id="monograph-publication-date" class="input-small" type="text"></input>
+				<input id="textbook-publication-date" class="input-small datepicker" type="text"></input>
 			</div>
 			<div>
 				<label>Кількість сторінок</label>
@@ -58,33 +101,119 @@
 			</div>
 		</div>
 	</div>
-	<div id="monograph-content-output" class="hero-unit right">
-		<h4>Результат</h4>
-		<textarea id="output-result" class="output-textarea"></textarea>
+	<div id="article-content" class="content input-block center" style="display: none">
+		<div id="article-author" class="hero-unit">
+			<h4>Про авторів</h4>
+			<div>
+				<label>Автори</label>
+			</div>
+			<ul id="article-content-author-list">
+				<li class="author-list-template hidden">
+					<span class="author-name"></span>
+					<button onclick="SARM.INDEX.deleteAuthor($(this));" class="btn" type="button">-</button>
+				</li>
+			</ul>
+			<div class="input-append">
+				 <input id="article-content-author-full-name" type="text" class="span2">
+			    <button id="add-button" onclick="SARM.INDEX.addAuthor($(this));" class="btn">+</button>
+			</div>
+		</div>
+		<div id="article-publication" class="hero-unit">
+			<h4>Про статтю</h4>
+			<div>
+				<label>Місце видавництва</label>
+				<input class="input-xlarge" type="text"></input>
+			</div>
+			<div>
+				<label>Назва видавництва</label>
+				<input class="input-xlarge" type="text"></input>
+			</div>
+			<div>
+				<label>Рік видавництва</label>
+				<input id="article-publication-date" class="input-small datepicker" type="text"></input>
+			</div>
+			<div>
+				<label>Кількість сторінок</label>
+				<input class="input-mini" type="text"></input>
+			</div>
+		</div>
 	</div>
-	<div id="textbook-content" class="content input-block" style="display: none">
-		<div id="textbook-author">
+	<div id="thesis-content" class="content input-block center" style="display: none">
+		<div id="thesis-author" class="hero-unit">
+			<h4>Про авторів</h4>
+			<div>
+				<label>Автори</label>
+			</div>
+			<ul id="thesis-content-author-list">
+				<li class="author-list-template hidden">
+					<span class="author-name"></span>
+					<button onclick="SARM.INDEX.deleteAuthor($(this));" class="btn" type="button">-</button>
+				</li>
+			</ul>
+			<div class="input-append">
+				 <input id="thesis-content-author-full-name" type="text" class="span2">
+			    <button id="add-button" onclick="SARM.INDEX.addAuthor($(this));" class="btn">+</button>
+			</div>
 		</div>
-		<div id="textbook-publication">
+		<div id="thesis-publication" class="hero-unit">
+			<h4>Про тези доповідей конференції</h4>
+			<div>
+				<label>Місце видавництва</label>
+				<input class="input-xlarge" type="text"></input>
+			</div>
+			<div>
+				<label>Назва видавництва</label>
+				<input class="input-xlarge" type="text"></input>
+			</div>
+			<div>
+				<label>Рік видавництва</label>
+				<input id="thesis-publication-date" class="input-small datepicker" type="text"></input>
+			</div>
+			<div>
+				<label>Кількість сторінок</label>
+				<input class="input-mini" type="text"></input>
+			</div>
 		</div>
 	</div>
-	<div id="article-content" class="content input-block" style="display: none">
-		<div id="article-author">
+	<div id="eresource-content" class="content input-block center" style="display: none">
+		<div id="eresource-author" class="hero-unit">
+			<h4>Про авторів</h4>
+			<div>
+				<label>Автори</label>
+			</div>
+			<ul id="eresource-content-author-list">
+				<li class="author-list-template hidden">
+					<span class="author-name"></span>
+					<button onclick="SARM.INDEX.deleteAuthor($(this));" class="btn" type="button">-</button>
+				</li>
+			</ul>
+			<div class="input-append">
+				 <input id="eresource-content-author-full-name" type="text" class="span2">
+			    <button id="add-button" onclick="SARM.INDEX.addAuthor($(this));" class="btn">+</button>
+			</div>
 		</div>
-		<div id="article-publication">
-		</div>
-	</div>
-	<div id="thesis-content" class="content input-block" style="display: none">
-		<div id="thesis-author">
-		</div>
-		<div id="thesis-publication">
-		</div>
-	</div>
-	<div id="eresource-content" class="content input-block" style="display: none">
-		<div id="eresource-author">
-		</div>
-		<div id="eresource-publication">
+		<div id="eresource-publication" class="hero-unit">
+			<h4>Про електронний ресурс</h4>
+			<div>
+				<label>Місце видавництва</label>
+				<input class="input-xlarge" type="text"></input>
+			</div>
+			<div>
+				<label>Назва видавництва</label>
+				<input class="input-xlarge" type="text"></input>
+			</div>
+			<div>
+				<label>Рік видавництва</label>
+				<input id="eresource-publication-date" class="input-small datepicker" type="text"></input>
+			</div>
+			<div>
+				<label>Кількість сторінок</label>
+				<input class="input-mini" type="text"></input>
+			</div>
 		</div>
 	</div>
 </div>
-
+	<div id="output" class="hero-unit right">
+		<h4>Результат</h4>
+		<textarea id="output-result" class="output-textarea"></textarea>
+	</div>
